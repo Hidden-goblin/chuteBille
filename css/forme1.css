@@ -1,0 +1,104 @@
+/* Style de l'entête */
+header{
+	background:silver;
+	width:1000px;
+	}
+
+/* Style des conteneur */
+.conteneur{
+	width:1000px;
+	height:600px;
+}
+.jumbotron{
+margin-top:-20px;
+}
+#accueil{
+	display:block;
+}
+#simulation{
+	display:none;
+}
+
+.information{
+	position : absolute;
+	left : 160px;
+	width: 800px;
+}
+#traitement{
+	display:none;
+}
+
+#eprouvette{
+	position : absolute;
+	left : 50px;
+	background:aqua;
+	width:60px;
+	height:500px;
+}
+
+#bille{
+	position:absolute;
+	background : black;
+	-webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    width:20px;
+    height:20px;
+    left:20px;
+    top:0px;
+    color:rgba(0,0,0,0);
+}
+
+#resultat{
+	position:absolute;
+	top:300px;
+	width:400px
+}
+.boutons{
+	width:100px;
+	position:relative;
+}
+#simulationInformationTexte{
+position:absolute;
+top:0px;
+}
+
+#choixSimulation{
+position:absolute;
+top:200px;
+width:400px}
+
+#affichage{
+		position:absolute;
+}
+
+#tableau{
+	position:absolute;
+	left:5px;
+	width:400px;
+	display:none;
+}
+table{
+	border-collapse: collapse;
+}
+table tr td{
+	border:1px solid black;
+	padding:10px;
+}
+#canvas{
+	position:absolute;
+	width:400px;
+	height:400px;
+	display:none;
+}
+div#version{
+	display:none;
+	}
+
+div#instructions{
+	display:none;
+	}
+footer{
+position:absolute;
+bottom:0px;
+}

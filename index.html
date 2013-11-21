@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Chute d'une bille dans un fluide</title>
+    <!-- Bibliothèques JQuerry -->
+		<script src="./js/jquery-1.8.2.min.js"> </script>
+		<script src="./js/jquery-ui-1.8.21.min.js"></script>
+    <!-- Script d'enregistrement en local -->
+		<script src="./js/FileSaver.js"></script>
+    <!-- Bibliothèque Bootstrap -->
+    <script src="./js/bootstrap.js"></script>
+		<!-- Application javascript -->
+		<script src="./js/app.fichier.js"></script>
+		<script src="./js/app.setting.js"></script>
+		<script src="./js/app.simulation.js"></script>
+		<script src="./js/app.scene.js"></script>
+		<script src="./js/app.js"></script>
+    <!-- feuilles de styles -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+		<link rel="stylesheet" href="./css/forme1.css" >
+		<link rel="stylesheet" href="./css/jquery-ui.css" >
+    
+	</head>
+	
+<body>
+	
+<!-- Div popup d'information et licence -->
+<div id="version" title="Notes de versions" class="ui-dialog"> 
+<h1>Licence</h1>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+      <img alt="Licence Creative Commons" style="border-width:0" src="img/88x31.png" /></a>
+      <br />Cette oeuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Licence Creative Commons :
+      <br/> Attribution - Pas d&#39;Utilisation Commerciale - Partage à l&#39;Identique 3.0 non transposé</a>.
+
+<h1>Modifications envisagées</h1>
+      <ul>
+        <li> Améliorer la graduation des axes (irrégularité de la graduation à cause des arrondis, apparition de plusieurs 0 sur la graduation)</li> 
+        <li> Possibilité d'augmenter le nombre de valeurs données dans le tableau</li>
+        <li> Modification de la taille de la bille</li>
+        <li> Ajouter la possibilité d'imprimer les graphiques produits</li>
+      </ul>
+</div>
+		
+<div id="instructions" title="Mode d'emploi" class="ui-dialog" style="width:500px"> 
+			
+  <h1>Mode d'emploi</h1>
+    Sommaire :
+    <ul>
+      <li>Choix de simulation</li>
+      <li>Utilisation</li>
+      <li>Écran d'accueil</li>
+      <li>Écran de simulation</li>
+      <li>Écran de traitement</li>
+    </ul>
+    <p>
+    Cette application a pour but la simulation de la chute d'un solide dans un fluide.
+    </p>
+				
+      <h2> Choix de simulation</h2>
+	
+		La simulation est basée sur les équations du mouvement d'un corps dans le champ de pesanteur, soumis à la résistance du fluide et à la poussée d'Archimède.
+		<ul>
+			<li> La constante de pesanteur est prise à 9,8 N/kg</li>
+			<li> La résistance du fluide est considérée comme étant linéaire avec la vitesse (frottement fluide).</li>
+		</ul>
+		<p>
+		Le mouvement est celui du centre de gravité de l'objet. La position de la bille est donc repérée par son centre de gravité.
+		</p>
+		<p>
+		Le solide est plein, de rayon 10mm. Il chute dans une colonne de 50cm de hauteur. Il est lâché sans vitesse initiale.
+		</p>
+		<p> 
+		Les effets de bord ne sont pas pris en compte dans cette simulation.
+		</p>
+		
+		
+
+	<h2> Utilisation</h2>
+	La simulation se déroule en trois étapes qui correspondent à trois écrans différents. Dans l'ordre nous avons :
+	<ol>
+		<li> L'écran d'accueil où l'on peut modifier les paramètres de la simulation.</li>
+		<li> L'écrand de simulation où l'on peut visionner l'expérience avec les paramètres choisis.</li>
+		<li> L'écran de traitement où l'on peut visualiser les résultats de la simulation.</li>
+	</ol>
+	
+	<h2>Écran d'accueil.</h2>
+	Sur l'écran d'accueil, nous avons deux listes déroulantes permettant de choisir le type de fluide dans lequel chute la bille et la matière de la bille. 
+	<br />
+	Un bouton permet de passer à l'écran de simulation. 
+	<br />
+	Vous pouvez revenir à tout moment à cet écran. Dans ce cas les données de la simulation en cours sont perdues.
+	<h2>Écran de simulation</h2>
+	Il est divisé en trois zones :
+	<ul>
+		<li> A gauche la partie visuelle de la simulation.</li>
+		<li> Au centre une zone contenant des informations textuelles.</li>
+		<li> A droite la partie commande.</li>
+	</ul>
+	
+	La zone visuelle de la simulation est constitué par une colonne remplie de fluide d'une couleur bleue dans laquelle on a placé la bille (en noir) en attente d'être lâchée.
+	<br />
+	Les informations textuelles donnent des indications sur la faisabilité de la simulation ainsi que les échelles de temps de la simulation. Enfin il est rappelé les choix effectués pour la simulation en cours.
+	 De plus il est possible de faire des choix sur la future simulation comme 
+	 <ul>
+	 	<li> Faire une chronophotographie du mouvement.</li>
+	 	<li> Modifier le passage du temps pour que la simulation se déroule plus ou moins rapidement.</li>
+	 </ul>
+	 Ces options ne modifient que l'aspect visuel et n'ont pas d'influence sur les données réelles de la simulation.
+	<br />
+	La partie commande est constituée de plusieurs boutons :
+	<ul>
+		<li> Un bouton permettant de lancer la simulation. Il est actif que si la simulation est possible et qu'elle n'a pas encore été faite.</li>
+		<li> Un bouton permettant de stopper une simulation encours. Ce bouton n'est visible que lorsque la simulation est lancée et que la bille n'est pas encore arrivée en bas de la colonne.</li>
+		<li> Un bouton permettant de réinitialiser la simulation dans l'état initial pour pouvoir la relancer.</li>
+		<li> Un bouton permettant le retour à l'écran d'accueil.</li>
+		<li> Un bouton permettant d'aller vers la partie traitement. Il est cliquable dès que la simulation a été lancée au moins une fois. L'arrêt de la simulation en cours ne modifie pas le nombre des valeurs de la simulation. </li>
+	</ul>
+	<h2>Écran de traitement</h2>
+	Cet écran est principalement composé de deux zones:
+	<ul>
+		<li> Une zone d'affichage</li>
+		<li> Une zone de commande</li>
+	</ul>
+	
+	La zone de commande est composée de quatre boutons et d'un choix.
+	<ul>
+		<li> Un bouton permettant de retourner à l'écran d'accueil.</li>
+		<li> Un bouton permettant l'affichage d'un tableau donnant la position en fonction du temps. Ce tableau peut être copier puis coller dans un logiciel tableur en vue d'une exploitation.</li>
+		<li> Un bouton associé au choix permettant l'affichage soit de la courbe des positions en fonction du temps soit de la courbe des vitesses en fonction du temps.</li>
+		<li> Un bouton permettant de télécharger les données de la simulation pour un traitement extérieur. L'ensemble des valeurs sont dans le format numérique anglo-saxon.</li>
+	</ul>
+	
+	Toutes ces informations s'affiche dans la zone de gauche.
+</div> 
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="navbar-header">
+    <ul class="nav navbar-nav">
+      <li><a href="../index.html">Accueil</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Applications 
+        <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="../referentiel/index.html">Problème de caméra.</a></li>
+          <li><a href="#">Bloqué sur Terre !</a></li>
+          <li><a href="../chute/index.html">Absence de matériel.</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--Entête indiquant le titre et la page où l'on se trouve  -->
+<div class="jumbotron">
+<div class="container">
+	<h2>Simulation<small> de la chute d'une bille dans un fluide. </small></h2>
+		<p>
+			<span id="titrePage"> Sélection des paramètres de simulation. </span>
+		</p>
+</div>
+</div>
+
+<!-- Les différentes sections qui seront affichées ou cachés -->
+<div id="accueil" class="container" >
+	<form id="parametres" class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="fluide" class="col-md-4 control-label">Choix du fluide dans lequel chute la bille</label>
+      <div class="col-md-8">
+        <select id="fluide" name="fluide" class="form-control">
+          <option value="eau" selected>Eau</option>
+          <option value="air">Air</option>
+          <option value="glycerine">Glycerine</option>
+          <option value="alcool">Alcool</option>
+          <option value="miel">Miel</option>
+          <option value="huile">Huile d'olive</option>
+          <option value="jus">Jus de raisin</option>
+          <option value="petrole">Pétrole</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="matiere" class="col-md-4 control-label"> Matière de la bille</label>
+      <div class="col-md-8">
+        <select id="matiere" name="matiere" class="form-control">
+          <option value="plastique" selected>Plastique</option>
+          <option value="aluminium">Aluminium</option>
+          <option value="fer">Fer</option>
+          <option value="cuivre">Cuivre</option>
+          <option value="plomb">Plomb</option>
+        </select>
+      </div>
+    </div>  
+    <input type="submit" value="Aller à la simulation" class="btn btn-primary"/>
+  </form>
+</div>
+
+<div id="simulation" class="container">
+  <div class="row">
+    <!-- Les boutons d'action de la simulation -->
+    <div class="col-md-2">
+      <div class="boutons">
+        <p><button class="btn btn-primary" id="animation">Lancer la simulation</button></p>
+        <p><button class="btn btn-primaru" id="arret">Arrêter la simulation</button></p>
+        <p><button class="btn btn-primary" id="reset">Revenir à l'état initial</button></p>
+        <p><button class="btn btn-primary" id="retourParam">Retourner aux paramètres</button></p>
+        <p><button class="btn btn-primary" id="versTraitement">Aller au traitement des mesures</button></p>
+	    </div>
+    </div>
+    <!-- Les informations textuelles -->
+    <div class="col-md-8">
+      <div class="information">
+        <div id="simulationInformationTexte"> 
+          <p id="parametresChoisis"> </p>
+          <p id="tempsSimulation"></p>
+          <p id="erreurs"></p>
+          <p id="intervale"></p>
+          <img src="./img/Chargement.gif" id="chargement">
+        </div>
+        <div id="choixSimulation">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="chronophotogramme" class="col-md-8 control-label"> Affichage du chronophotogramme : </label>
+              <div class="col-md-4">
+                <input id="chronophotogramme" class="form-control" name="chronophotogramme" value="0" checked="" type="checkbox" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dilatationTemps" class="col-md-7 control-label"> Modification du passage du temps</label>
+              <div class="col-md-5">
+                <select class="form-control" id="dilatationTemps" name="dilatationTemps">
+                  <option value="320">Ralenti 8x</option>
+                  <option value="160">Ralenti 4x</option>
+                  <option value="80">Ralenti 2x</option>
+                  <option value="40" selected>Temps réel</option>
+                  <option value="20">Accéléré 2x</option>
+                  <option value="10">Accéléré 4x</option>
+                  <option value="5">Accéléré 8x</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="resultat">
+        </div>
+      </div>
+    </div>
+      
+    <!-- La simulation visuelle -->
+    <div class="col-md-2">
+      <div id="eprouvette">
+        <div id="bille">0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="traitement" class="container">
+  <div class="row">
+    <!-- Boutons de traitement -->
+    <div class="col-md-3">
+      <div class="boutons">
+        <button id="versParam" class="btn btn-primary">Modifier les paramètres</button>
+        <br />
+        <button id="tableValeur" class="btn btn-primary">Afficher le tableau de valeur</button>
+        <br />
+        <button id="courbe" class="btn btn-primary">Afficher la courbe des </button>
+        <form class="form">
+          <label>
+          <input type="radio" name="typeCourbe" value="position" checked /> positions 
+          </label>
+          <label>
+          <input type="radio" name="typeCourbe" value="vitesse" /> vitesses 
+          </label>
+        </form>
+        <button id="telecharger" class="btn btn-primary"> Télécharger les résultats de la simulation </button>
+      </div>
+    </div>
+    <!-- Affichage graphique -->
+    <div class="col-md-9">
+      <div id="affichage">
+        <canvas  id="canvas" height="400" width="500">
+          Le navigateur ne supporte pas l'élément canvas. Demander à l'administrateur d'installer la dernière version de votre navigateur.
+        </canvas>
+        <div id="tableau">
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+
+<div id="donnee" class="container">
+	<div id="lesDonnees">
+	</div>
+	<button id="retour"> Retour au traitement des données</button>
+</div>
+<!-- Notes d'appartenance -->
+<footer>
+<!-- Faire popup sur les liens -->
+	<button id="buttonVersion">Notes de versions</button>
+	<!--  <a href="#?w=500" rel="version"> Notes de versions</a>-->
+	<br />
+	<button id="buttonInstructions">Mode d'emploi</button>
+	<br />
+	E Aivayan
+	<br />
+	
+</footer>
+</body>
+</html>
