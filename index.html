@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./css/bootstrap.css">
 		<link rel="stylesheet" href="./css/forme1.css" >
 		<link rel="stylesheet" href="./css/jquery-ui.css" >
-    
+    <link rel="stylesheet" href="./css/modif.css" >
 	</head>
 	
 <body>
@@ -134,27 +134,10 @@
 	Toutes ces informations s'affiche dans la zone de gauche.
 </div> 
 
-<!-- Barre de navigation -->
-<nav class="navbar navbar-inverse" role="navigation">
-  <div class="navbar-header">
-    <ul class="nav navbar-nav">
-      <li><a href="../index.html">Accueil</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Applications 
-        <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="../referentiel/index.html">Problème de caméra.</a></li>
-          <li><a href="#">Bloqué sur Terre !</a></li>
-          <li><a href="../chute/index.html">Absence de matériel.</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
 <!--Entête indiquant le titre et la page où l'on se trouve  -->
 <div class="jumbotron">
 <div class="container">
-	<h2>Simulation<small> de la chute d'une bille dans un fluide. </small></h2>
+	<h2>Absence de matériel.<small> Simulation de la chute d'une bille dans un fluide. </small></h2>
 		<p>
 			<span id="titrePage"> Sélection des paramètres de simulation. </span>
 		</p>
@@ -163,33 +146,29 @@
 
 <!-- Les différentes sections qui seront affichées ou cachés -->
 <div id="accueil" class="container" >
-	<form id="parametres" class="form-horizontal" role="form">
+	<form id="parametres"  role="form">
     <div class="form-group">
-      <label for="fluide" class="col-md-4 control-label">Choix du fluide dans lequel chute la bille</label>
-      <div class="col-md-8">
-        <select id="fluide" name="fluide" class="form-control">
-          <option value="eau" selected>Eau</option>
-          <option value="air">Air</option>
-          <option value="glycerine">Glycerine</option>
-          <option value="alcool">Alcool</option>
-          <option value="miel">Miel</option>
-          <option value="huile">Huile d'olive</option>
-          <option value="jus">Jus de raisin</option>
-          <option value="petrole">Pétrole</option>
-        </select>
-      </div>
+      <label for="fluide" class="control-label">Choix du fluide dans lequel chute la bille</label>
+      <select id="fluide" name="fluide" class="form-control">
+        <option value="eau" selected>Eau</option>
+        <option value="air">Air</option>
+        <option value="glycerine">Glycerine</option>
+        <option value="alcool">Alcool</option>
+        <option value="miel">Miel</option>
+        <option value="huile">Huile d'olive</option>
+        <option value="jus">Jus de raisin</option>
+        <option value="petrole">Pétrole</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="matiere" class="col-md-4 control-label"> Matière de la bille</label>
-      <div class="col-md-8">
-        <select id="matiere" name="matiere" class="form-control">
-          <option value="plastique" selected>Plastique</option>
-          <option value="aluminium">Aluminium</option>
-          <option value="fer">Fer</option>
-          <option value="cuivre">Cuivre</option>
-          <option value="plomb">Plomb</option>
-        </select>
-      </div>
+      <label for="matiere" class="control-label"> Matière de la bille</label>
+      <select id="matiere" name="matiere" class="form-control">
+        <option value="plastique" selected>Plastique</option>
+        <option value="aluminium">Aluminium</option>
+        <option value="fer">Fer</option>
+        <option value="cuivre">Cuivre</option>
+        <option value="plomb">Plomb</option>
+      </select>
     </div>  
     <input type="submit" value="Aller à la simulation" class="btn btn-primary"/>
   </form>
@@ -198,14 +177,12 @@
 <div id="simulation" class="container">
   <div class="row">
     <!-- Les boutons d'action de la simulation -->
-    <div class="col-md-2">
-      <div class="boutons">
-        <p><button class="btn btn-primary" id="animation">Lancer la simulation</button></p>
-        <p><button class="btn btn-primaru" id="arret">Arrêter la simulation</button></p>
-        <p><button class="btn btn-primary" id="reset">Revenir à l'état initial</button></p>
-        <p><button class="btn btn-primary" id="retourParam">Retourner aux paramètres</button></p>
-        <p><button class="btn btn-primary" id="versTraitement">Aller au traitement des mesures</button></p>
-	    </div>
+    <div class="col-md-3">
+      <p><button class="btn btn-primary btn-block" id="animation">Lancer la simulation</button></p>
+      <p><button class="btn btn-primary btn-block" id="arret">Arrêter la simulation</button></p>
+      <p><button class="btn btn-primary btn-block" id="reset">Revenir à l'état initial</button></p>
+      <p><button class="btn btn-primary btn-block" id="retourParam">Retourner aux paramètres</button></p>
+      <p><button class="btn btn-primary btn-block" id="versTraitement">Aller au traitement des mesures</button></p>
     </div>
     <!-- Les informations textuelles -->
     <div class="col-md-8">
@@ -218,26 +195,24 @@
           <img src="./img/Chargement.gif" id="chargement">
         </div>
         <div id="choixSimulation">
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="chronophotogramme" class="col-md-8 control-label"> Affichage du chronophotogramme : </label>
-              <div class="col-md-4">
+          <form role="form">
+            <div class="checkbox">
+              <label for="chronophotogramme" class="control-label"> 
                 <input id="chronophotogramme" class="form-control" name="chronophotogramme" value="0" checked="" type="checkbox" />
-              </div>
+                Affichage du chronophotogramme 
+              </label>
             </div>
             <div class="form-group">
-              <label for="dilatationTemps" class="col-md-7 control-label"> Modification du passage du temps</label>
-              <div class="col-md-5">
-                <select class="form-control" id="dilatationTemps" name="dilatationTemps">
-                  <option value="320">Ralenti 8x</option>
-                  <option value="160">Ralenti 4x</option>
-                  <option value="80">Ralenti 2x</option>
-                  <option value="40" selected>Temps réel</option>
-                  <option value="20">Accéléré 2x</option>
-                  <option value="10">Accéléré 4x</option>
-                  <option value="5">Accéléré 8x</option>
-                </select>
-              </div>
+              <label for="dilatationTemps" class="control-label"> Modification du passage du temps</label>
+              <select class="form-control" id="dilatationTemps" name="dilatationTemps">
+                <option value="320">Ralenti 8x</option>
+                <option value="160">Ralenti 4x</option>
+                <option value="80">Ralenti 2x</option>
+                <option value="40" selected>Temps réel</option>
+                <option value="20">Accéléré 2x</option>
+                <option value="10">Accéléré 4x</option>
+                <option value="5">Accéléré 8x</option>
+              </select>
             </div>
           </form>
         </div>
@@ -247,7 +222,7 @@
     </div>
       
     <!-- La simulation visuelle -->
-    <div class="col-md-2">
+    <div class="col-md-1">
       <div id="eprouvette">
         <div id="bille">0</div>
       </div>
@@ -259,22 +234,18 @@
   <div class="row">
     <!-- Boutons de traitement -->
     <div class="col-md-3">
-      <div class="boutons">
-        <button id="versParam" class="btn btn-primary">Modifier les paramètres</button>
-        <br />
-        <button id="tableValeur" class="btn btn-primary">Afficher le tableau de valeur</button>
-        <br />
-        <button id="courbe" class="btn btn-primary">Afficher la courbe des </button>
-        <form class="form">
-          <label>
-          <input type="radio" name="typeCourbe" value="position" checked /> positions 
-          </label>
-          <label>
-          <input type="radio" name="typeCourbe" value="vitesse" /> vitesses 
-          </label>
-        </form>
-        <button id="telecharger" class="btn btn-primary"> Télécharger les résultats de la simulation </button>
-      </div>
+      <button id="versParam" class="btn btn-primary btn-block">Modifier les paramètres</button>
+      <button id="tableValeur" class="btn btn-primary btn-block">Afficher le tableau de valeur</button>
+      <button id="courbe" class="btn btn-primary btn-block">Afficher la courbe des </button>
+      <form class="form">
+        <label>
+        <input type="radio" name="typeCourbe" value="position" checked /> positions 
+        </label>
+        <label>
+        <input type="radio" name="typeCourbe" value="vitesse" /> vitesses 
+        </label>
+      </form>
+      <button id="telecharger" class="btn btn-primary btn-block"> Télécharger les résultats de la simulation </button>     
     </div>
     <!-- Affichage graphique -->
     <div class="col-md-9">
@@ -297,14 +268,10 @@
 <!-- Notes d'appartenance -->
 <footer>
 <!-- Faire popup sur les liens -->
-	<button id="buttonVersion">Notes de versions</button>
+	<button id="buttonVersion" class="btn btn-default btn-block">Notes de versions</button>
 	<!--  <a href="#?w=500" rel="version"> Notes de versions</a>-->
-	<br />
-	<button id="buttonInstructions">Mode d'emploi</button>
-	<br />
+	<button id="buttonInstructions" class="btn btn-default btn-block">Mode d'emploi</button>
 	E Aivayan
-	<br />
-	
 </footer>
 </body>
 </html>
